@@ -16,7 +16,10 @@ const elements = {
   subtitle: document.querySelector('.lead'),
   inputPlaceholder: document.querySelector('[data-label]'),
   example: document.querySelector('[data-example]'),
-  ceatedBy: document.querySelector('[data-createdBy]'),
+  createdBy: document.querySelector('[data-createdBy]'),
+
+  feeds: document.querySelector('.feeds'),
+  posts: document.querySelector('.posts'),
 };
 
 
@@ -32,7 +35,8 @@ const initialState = {
       rccLink: '',
     },
   },
-  links: [],
+  feeds: [],
+  posts: [],
 }
 
 
