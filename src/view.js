@@ -21,8 +21,15 @@ const renderToggleLanguage = (elements, value, previousValue, i18n) => {
   elements.example.textContent = i18n.t('interface.example');
   elements.createdBy.innerHTML = i18n.t('interface.createdBy');
   console.log(elements.posts);
-  elements.posts.querySelector('.card-tittle').textContent = i18n.t('interface.posts');
-  elements.feeds.querySelector('.card-tittle').textContent = i18n.t('interface.feeds');
+
+  const feedsTitle =  elements.feeds.querySelector('.card-tittle');
+  const postsTitle =  elements.posts.querySelector('.card-tittle');
+
+  if(feedsTitle || postsTitle) {
+    feedsTitle.textContent = i18n.t('interface.feeds');
+    postsTitle.textContent = i18n.t('interface.posts');
+  }
+  
   elements.posts.querySelectorAll('button')
     .forEach((button) => button.textContent = i18n.t('interface.view'));
 

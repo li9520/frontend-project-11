@@ -20,7 +20,7 @@ export default (data, url) => {
   const parsedPosts = Array.from(doc.querySelectorAll('item')).map((item) => {
     const title = item.querySelector('title').textContent;
     const link = item.querySelector('link').textContent;
-    const id = uniqueId();
+    const id = item.querySelector('guid').textContent;
     const description = item.querySelector('description').textContent;
     return { id, feedId, title, link, description };
   })
