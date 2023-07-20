@@ -12,6 +12,11 @@ export default {
       view: 'Preview',
       posts: 'Posts',
       feeds: 'Feeds',
+
+      modal: {
+        readMore: 'Read more',
+        close: 'Close',
+      },
     },
     process: {
       messages: {

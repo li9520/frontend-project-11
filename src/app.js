@@ -39,6 +39,19 @@ export default (elements, initialState, i18n) => {
     state.language = e.target.dataset.lng;
   }));
 
+  elements.posts.addEventListener('click', (e) => {
+    const id = e.target.dataset.id;
+    console.log(id);
+    if (!id) {
+      return;
+    }
+
+    e.preventDefault();
+
+    state.uiState.viewedPosts.push(id);
+    state.uiState.previewPostId = id;
+  });
+
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
     state.form.processState = 'filling';

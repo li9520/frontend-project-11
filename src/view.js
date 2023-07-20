@@ -29,6 +29,9 @@ const renderToggleLanguage = (elements, value, previousValue, i18n) => {
     feedsTitle.textContent = i18n.t('interface.feeds');
     postsTitle.textContent = i18n.t('interface.posts');
   }
+
+  elements.modal.modalFullArticle.textContent = i18n.t('interface.modal.readMore');
+  elements.modal.modalCloseSecondary.textContent = i18n.t('interface.modal.close');
   
   elements.posts.querySelectorAll('button')
     .forEach((button) => button.textContent = i18n.t('interface.view'));
@@ -66,7 +69,7 @@ const renderFeeds = (container, feeds, i18n) => {
 }
 
 
-const renderPosts = (container, posts, i18n) => {
+const renderPosts = (container, {uiState, posts}, i18n) => {
   container.innerHTML = '';
   const card = document.createElement('div');
   card.classList.add('card', 'border-0');
@@ -78,14 +81,16 @@ const renderPosts = (container, posts, i18n) => {
 
   const ulForPosts = document.createElement('ul');
   ulForPosts.classList.add('list-group', 'border-0', 'rounded-0');
-  posts.forEach(({ id, title, link, description }) => {
+  posts.forEach(({ id, title, link }) => {
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
     const a = document.createElement('a');
     a.setAttribute('href', link);
     a.setAttribute('target', '_blank');
     a.setAttribute('rel', 'noopener noreferrer');
-    a.classList.add('fw-normal', 'link-secondary');
+
+    const classList = (uiState.viewedPosts.includes(id)) ? ['fw-bold', 'link-secondary'] : ['fw-normal', 'link-secondary'];
+    a.classList.add(...classList);
     a.dataset.id = id;
     a.textContent = title;
 
@@ -123,7 +128,21 @@ const readerProccessState = (elements, processState, i18n) => {
   }
 }
 
-const render = (elements, i18n) => (path, value, previousValue) => {
+const renderModal = (elements, state) => {
+  const {
+    modalTitle, modalBody, modalFullArticle,
+  } = elements.modal;
+
+  const previewPost = state.posts
+    .filter(({ id }) => id === state.uiState.previewPostId);
+  const [{  title, link, description }] = previewPost;
+
+  modalTitle.textContent = title;
+  modalBody.textContent = description;
+  modalFullArticle.href = link;
+};
+
+const render = (elements, state, i18n) => (path, value, previousValue) => {
   switch (path) {
     case 'form.valid':
       elements.linkInput.classList.toggle('is-invalid')
@@ -142,12 +161,16 @@ const render = (elements, i18n) => (path, value, previousValue) => {
     case 'feeds':
       renderFeeds(elements.feeds, value, i18n);
       break;
+    case 'uiState.viewedPosts':
     case 'posts':
-      renderPosts(elements.posts, value, i18n);
+      renderPosts(elements.posts, state, i18n);
+      break;
+    case 'uiState.previewPostId':
+      renderModal(elements, state);
       break;
     default:
       break;
   }
 }
 
-export default (elements, initialState, i18n) => onChange(initialState, render(elements, i18n));
+export default (elements, initialState, i18n) => onChange(initialState, render(elements,initialState, i18n));

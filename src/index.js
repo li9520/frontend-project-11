@@ -20,6 +20,14 @@ const elements = {
 
   feeds: document.querySelector('.feeds'),
   posts: document.querySelector('.posts'),
+
+  modal: {
+    modalTitle: document.querySelector('.modal-title'),
+    modalBody: document.querySelector('.modal-body'),
+    modalFullArticle: document.querySelector('.full-article'),
+    modalCloseSecondary: document.querySelector('.btn-secondary'),
+    modalCloseButtons: document.querySelectorAll('[data-bs-dismiss="modal"]'),
+  },
 };
 
 
@@ -34,6 +42,10 @@ const initialState = {
     fields: {
       rccLink: '',
     },
+  },
+  uiState: {
+    viewedPosts: [],
+    previewPostId: null,
   },
   feeds: [],
   posts: [],

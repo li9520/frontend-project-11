@@ -12,6 +12,11 @@ export default {
       view: 'Просмотр',
       posts: 'Посты',
       feeds: 'Фиды',
+
+      modal: {
+        readMore: 'Читать полностью',
+        closeModal: 'Закрыть',
+      },
     },
     process: {
       messages: {
