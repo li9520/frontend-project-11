@@ -68,7 +68,13 @@ export default (elements, initialState, i18n) => {
       }).catch((err) => {
         console.log(err.message);
         state.form.processState = 'error';
-        state.form.error = (err.message === 'Parser Error') ? i18n.t('process.error.invalidRSS') : i18n.t(`process.error.${err.message}`);
+        if (err.message === 'Parser Error') {
+          state.form.error = i18n.t('process.error.invalidRSS');
+        } else if (err.message === 'Network Error') {
+          state.form.error = i18n.t('process.error.network');
+        } else {
+          i18n.t(`process.error.${err.message}`);
+        }
         state.form.valid = false;
       });
   });
