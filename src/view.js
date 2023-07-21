@@ -6,6 +6,10 @@ const renderError = (elements, error) => {
 };
 
 const renderToggleLanguage = (elements, value, previousValue, i18n) => {
+  const {
+    title, subtitle, inputPlaceholder, submitButton, example,
+    createdBy, feeds, posts, modal, feedback, form, linkInput,
+  } = elements;
   const languageButtons = Array.from(elements.languageButtons);
   const previousLangButton = languageButtons.find((el) => el.dataset.lng === previousValue);
   const activeLangButton = languageButtons.find((el) => el.dataset.lng === value);
@@ -13,20 +17,6 @@ const renderToggleLanguage = (elements, value, previousValue, i18n) => {
   previousLangButton.classList.replace('btn-primary', 'btn-outline-primary');
   activeLangButton.classList.replace('btn-outline-primary', 'btn-primary');
 
-  const {
-    title,
-    subtitle,
-    inputPlaceholder,
-    submitButton,
-    example,
-    createdBy,
-    feeds,
-    posts,
-    modal,
-    feedback,
-    form,
-    linkInput,
-  } = elements;
   title.textContent = i18n.t('interface.title');
   subtitle.textContent = i18n.t('interface.subtitle');
   inputPlaceholder.textContent = i18n.t('interface.placeholder');
