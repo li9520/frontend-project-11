@@ -3,8 +3,7 @@ import onChange from 'on-change';
 const renderError = (elements, error) => {
   const feedbackElement = elements.feedback;
   feedbackElement.textContent = error;
-}
-
+};
 
 const renderToggleLanguage = (elements, value, previousValue, i18n) => {
   const languageButtons = Array.from(elements.languageButtons);
@@ -14,34 +13,52 @@ const renderToggleLanguage = (elements, value, previousValue, i18n) => {
   previousLangButton.classList.replace('btn-primary', 'btn-outline-primary');
   activeLangButton.classList.replace('btn-outline-primary', 'btn-primary');
 
-  elements.title.textContent = i18n.t('interface.title');
-  elements.subtitle.textContent = i18n.t('interface.subtitle');
-  elements.inputPlaceholder.textContent = i18n.t('interface.placeholder');
-  elements.submitButton.textContent = i18n.t('interface.submit');
-  elements.example.textContent = i18n.t('interface.example');
-  elements.createdBy.innerHTML = i18n.t('interface.createdBy');
-  console.log(elements.posts);
+  const {
+    title,
+    subtitle,
+    inputPlaceholder,
+    submitButton,
+    example,
+    createdBy,
+    feeds,
+    posts,
+    modal,
+    feedback,
+    form,
+    linkInput,
+  } = elements;
+  title.textContent = i18n.t('interface.title');
+  subtitle.textContent = i18n.t('interface.subtitle');
+  inputPlaceholder.textContent = i18n.t('interface.placeholder');
+  submitButton.textContent = i18n.t('interface.submit');
+  example.textContent = i18n.t('interface.example');
+  createdBy.innerHTML = i18n.t('interface.createdBy');
 
-  const feedsTitle =  elements.feeds.querySelector('.card-tittle');
-  const postsTitle =  elements.posts.querySelector('.card-tittle');
+  const feedsTitle = feeds.querySelector('.card-tittle');
+  const postsTitle = posts.querySelector('.card-tittle');
 
-  if(feedsTitle || postsTitle) {
+  if (feedsTitle || postsTitle) {
     feedsTitle.textContent = i18n.t('interface.feeds');
     postsTitle.textContent = i18n.t('interface.posts');
   }
 
-  elements.modal.modalFullArticle.textContent = i18n.t('interface.modal.readMore');
-  elements.modal.modalCloseSecondary.textContent = i18n.t('interface.modal.close');
-  
-  elements.posts.querySelectorAll('button')
-    .forEach((button) => button.textContent = i18n.t('interface.view'));
+  modal.modalFullArticle.textContent = i18n.t('interface.modal.readMore');
+  modal.modalCloseSecondary.textContent = i18n.t('interface.modal.close');
 
-  elements.feedback.textContent = "";
-  elements.form.reset();
-  elements.linkInput.classList.remove('is-invalid');
-}
+  const buttons = elements.posts.querySelectorAll('button');
+
+  buttons.forEach((button) => {
+    // eslint-disable-next-line no-param-reassign
+    button.textContent = i18n.t('interface.view');
+  });
+
+  feedback.textContent = '';
+  form.reset();
+  linkInput.classList.remove('is-invalid');
+};
 
 const renderFeeds = (container, feeds, i18n) => {
+  // eslint-disable-next-line no-param-reassign
   container.innerHTML = '';
   const card = document.createElement('div');
   card.classList.add('card', 'border-0');
@@ -60,16 +77,16 @@ const renderFeeds = (container, feeds, i18n) => {
     h3.classList.add('h6', 'm-0');
     h3.textContent = title;
     const p = document.createElement('p');
-    p.classList.add('m-0', 'small', 'text-black-50')
+    p.classList.add('m-0', 'small', 'text-black-50');
     p.textContent = description;
     li.append(h3, p);
     ulForFeeds.append(li);
   });
   card.append(ulForFeeds);
-}
+};
 
-
-const renderPosts = (container, {uiState, posts}, i18n) => {
+const renderPosts = (container, { uiState, posts }, i18n) => {
+  // eslint-disable-next-line no-param-reassign
   container.innerHTML = '';
   const card = document.createElement('div');
   card.classList.add('card', 'border-0');
@@ -105,7 +122,7 @@ const renderPosts = (container, {uiState, posts}, i18n) => {
     ulForPosts.append(li);
   });
   card.append(ulForPosts);
-}
+};
 
 const readerProccessState = (elements, processState, i18n) => {
   const feedbackElement = elements.feedback;
@@ -126,7 +143,7 @@ const readerProccessState = (elements, processState, i18n) => {
     default:
       break;
   }
-}
+};
 
 const renderModal = (elements, state) => {
   const {
@@ -135,7 +152,7 @@ const renderModal = (elements, state) => {
 
   const previewPost = state.posts
     .filter(({ id }) => id === state.uiState.previewPostId);
-  const [{  title, link, description }] = previewPost;
+  const [{ title, link, description }] = previewPost;
 
   modalTitle.textContent = title;
   modalBody.textContent = description;
@@ -145,7 +162,7 @@ const renderModal = (elements, state) => {
 const render = (elements, state, i18n) => (path, value, previousValue) => {
   switch (path) {
     case 'form.valid':
-      elements.linkInput.classList.toggle('is-invalid')
+      elements.linkInput.classList.toggle('is-invalid');
       break;
     case 'form.error':
       if (value !== null) renderError(elements, value);
@@ -171,6 +188,7 @@ const render = (elements, state, i18n) => (path, value, previousValue) => {
     default:
       break;
   }
-}
+};
 
-export default (elements, initialState, i18n) => onChange(initialState, render(elements,initialState, i18n));
+// eslint-disable-next-line max-len
+export default (elements, initialState, i18n) => onChange(initialState, render(elements, initialState, i18n));

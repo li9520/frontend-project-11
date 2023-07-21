@@ -27,7 +27,7 @@ export default {
         network: 'Network error',
         invalidURL: 'The link must be a valid URL',
         duplicateErr: 'RSS already exists',
-      }
+      },
     },
-  }
-}
+  },
+};

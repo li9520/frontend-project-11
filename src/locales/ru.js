@@ -27,7 +27,7 @@ export default {
         network: 'Ошибка сети',
         invalidURL: 'Ссылка должна быть валидным URL',
         duplicateErr: 'RSS уже существует',
-      }
+      },
     },
-  }
-}
+  },
+};

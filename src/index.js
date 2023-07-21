@@ -1,9 +1,9 @@
 import './styles.scss';
 import 'bootstrap';
-import app from './app.js';
 import i18n from 'i18next';
-import resources from './locales/index.js';
 import * as yup from 'yup';
+import app from './app.js';
+import resources from './locales/index.js';
 
 const elements = {
   form: document.querySelector('.rss-form'),
@@ -30,7 +30,6 @@ const elements = {
   },
 };
 
-
 const defaultLng = 'ru';
 
 const initialState = {
@@ -49,8 +48,7 @@ const initialState = {
   },
   feeds: [],
   posts: [],
-}
-
+};
 
 const i18nInstance = i18n.createInstance();
 i18nInstance.init({
@@ -67,4 +65,4 @@ i18nInstance.init({
     },
   });
   app(elements, initialState, i18nInstance);
-})
+});
