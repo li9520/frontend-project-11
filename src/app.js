@@ -73,7 +73,7 @@ export default (elements, initialState, i18n) => {
         } else if (err.message === 'Network Error') {
           state.form.error = i18n.t('process.error.network');
         } else {
-          i18n.t(`process.error.${err.message}`);
+          state.form.error = i18n.t(`process.error.${err.message}`);
         }
         state.form.valid = false;
       });
