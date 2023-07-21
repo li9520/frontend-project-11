@@ -15,7 +15,7 @@ export default {
 
       modal: {
         readMore: 'Читать полностью',
-        closeModal: 'Закрыть',
+        close: 'Закрыть',
       },
     },
     process: {
