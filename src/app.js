@@ -41,8 +41,6 @@ export default (elements, initialState, i18n) => {
       return;
     }
 
-    e.preventDefault();
-
     state.uiState.viewedPosts.push(id);
     state.uiState.previewPostId = id;
   });

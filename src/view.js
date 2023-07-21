@@ -96,7 +96,7 @@ const renderPosts = (container, { uiState, posts }, i18n) => {
     a.setAttribute('target', '_blank');
     a.setAttribute('rel', 'noopener noreferrer');
 
-    const classList = (uiState.viewedPosts.includes(id)) ? ['fw-bold', 'link-secondary'] : ['fw-normal', 'link-secondary'];
+    const classList = (uiState.viewedPosts.includes(id)) ? ['fw-normal', 'link-secondary'] : ['fw-bold'];
     a.classList.add(...classList);
     a.dataset.id = id;
     a.textContent = title;
