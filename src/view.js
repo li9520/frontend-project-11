@@ -126,9 +126,11 @@ const readerProccessState = (elements, processState, i18n) => {
     case 'finish':
       feedbackElement.classList.add('text-success');
       feedbackElement.textContent = i18n.t('process.messages.processSuccess');
+      elements.form.reset();
       break;
     case 'error':
       feedbackElement.classList.add('text-danger');
+      elements.form.reset();
       break;
     default:
       break;
